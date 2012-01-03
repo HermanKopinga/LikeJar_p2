@@ -48,8 +48,8 @@ const int digit3pin = A1;
 const int buttonpin = 5;
           
 long ticks = 0;
-const byte reset = 60;
-const byte divide = 5;
+const byte reset = 6 ;
+const byte divide = 1;
 int likes;                    // The number of button presses.
 int num;
 int value;                    // The number displayed on the LEDs.
@@ -148,7 +148,7 @@ void loop()
           {*/
             // Normal operation, increment the counter.
             likes++; 
-            coolDownTicks = 12000;
+            coolDownTicks = 2000;
             eeprom_write_block((const void*)&likes, (void*)0, sizeof(likes));
 /*          }
           else
@@ -174,7 +174,7 @@ void loop()
   n = ticks/divide;
   
   // Most significant digit
-  if(n == 0)
+  if(n == 1)
   {
     digitalWrite(digit2pin,0);
     digitalWrite(digit3pin,0);
@@ -184,7 +184,7 @@ void loop()
   }
 
   // Middle significant digit  
-  if(n == 1)
+  if(n == 2)
   {
     digitalWrite(digit1pin,0);
     digitalWrite(digit3pin,0);
@@ -194,7 +194,7 @@ void loop()
   }
 
   // Least significant digit  
-  if(n == 2)
+  if(n == 3)
   {
     digitalWrite(digit1pin,0);
     digitalWrite(digit2pin,0);
@@ -210,7 +210,7 @@ void loop()
   } 
   
   // The rest of the time the leds are off, saves 10 mA power.
-  if(n > 2)
+  if(n > 3)
   {
      digitalWrite(digit1pin,0);
      digitalWrite(digit2pin,0);
